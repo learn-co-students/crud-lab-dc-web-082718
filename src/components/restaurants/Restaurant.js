@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import ReviewsContainer from '../../containers/ReviewsContainer'
+import ReviewsContainer from '../../containers/ReviewsContainer';
+import { connect } from 'react-redux';
 
 class Restaurant extends Component {
 
+  handleDelete = (event) => {
+    event.persist()
+    let restaurantID = event.target.id;
+
+    this.props.delete(restaurantID);
+  }
 
   render() {
     const { restaurant } = this.props;
@@ -10,8 +17,13 @@ class Restaurant extends Component {
     return (
       <div>
         <li>
-          {restaurant.text}
-          <button> X </button>
+          {restaurant.name}
+          <button
+            onClick={this.handleDelete}
+            id={restaurant.id}
+            >
+             X
+          </button>
           <ReviewsContainer restaurant={restaurant}/>
         </li>
       </div>
@@ -19,4 +31,10 @@ class Restaurant extends Component {
   }
 };
 
-export default Restaurant;
+const mapDispatchToProps = dispatch => {
+  return {
+    delete: restaurantID => {dispatch({type: "DELETE_RESTAURANT", payload: restaurantID})}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Restaurant);
