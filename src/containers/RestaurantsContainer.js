@@ -4,6 +4,7 @@ import Restaurants from '../components/restaurants/Restaurants'
 
 class RestaurantsContainer extends Component {
 
+
   render() {
     return (
       <div>
@@ -14,4 +15,6 @@ class RestaurantsContainer extends Component {
   }
 }
 
-export default RestaurantsContainer
+
+
+export default RestaurantsContainer;
